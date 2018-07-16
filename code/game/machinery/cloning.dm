@@ -207,6 +207,8 @@
 
 		H.set_cloned_appearance()
 
+		H.unlock_achievement(new/datum/achievement/cloned())
+
 	attempting = FALSE
 	return TRUE
 

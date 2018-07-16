@@ -17,6 +17,7 @@
 		if(NODISMEMBER in H.dna.species.species_traits) // species don't allow dismemberment
 			return 0
 
+	owner.unlock_achievement(new/datum/achievement/lose_limb())
 	var/obj/item/bodypart/affecting = C.get_bodypart("chest")
 	affecting.receive_damage(Clamp(brute_dam/2, 15, 50), Clamp(burn_dam/2, 0, 50)) //Damage the chest based on limb's existing damage
 	C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently dismembered!</B></span>")

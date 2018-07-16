@@ -54,3 +54,7 @@
 		logging = GLOB.individual_log_list[ckey]
 
 	player_logged = FALSE
+
+	//Load in their achievements.
+	var/savefile/F = new /savefile("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/achievements.sav")
+	client.achievement_holder.Read(F)

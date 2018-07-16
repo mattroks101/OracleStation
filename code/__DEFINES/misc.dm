@@ -444,3 +444,8 @@ GLOBAL_LIST_INIT(ghost_others_options, list(GHOST_OTHERS_SIMPLE, GHOST_OTHERS_DE
 
 //text files
 #define BRAIN_DAMAGE_FILE "traumas.json"
+
+//achievement difficulties
+#define DIFF_EASY	"easy"
+#define DIFF_MEDIUM	"medium"
+#define DIFF_HARD 	"hard"

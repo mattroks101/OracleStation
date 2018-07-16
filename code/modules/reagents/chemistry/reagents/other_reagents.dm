@@ -432,6 +432,8 @@
 	else
 		to_chat(H, "<span class='danger'>The pain vanishes suddenly. You feel no different.</span>")
 
+	H.unlock_acheivement(new/datum/achievement/mutate())
+
 /datum/reagent/stableslimetoxin/classic //The one from plasma on green slimes
 	name = "Mutation Toxin"
 	id = "mutationtoxin"

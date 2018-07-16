@@ -511,8 +511,10 @@ SUBSYSTEM_DEF(ticker)
 						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></FONT>")
 						if(shuttle_areas[get_area(Player)])
 							num_shuttle_escapees++
+						Player.unlock_achievement(new/datum/achievement/survivor())
 				else
 					to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></FONT>")
+					Player.unlock_achievement(new/datum/achievement/survivor())
 			else
 				to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></FONT>")
 

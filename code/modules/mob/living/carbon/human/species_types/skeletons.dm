@@ -13,3 +13,7 @@
 	liked_food = GROSS | MEAT | RAW
 	examine_text = "a Skeleton"
 	species_text_color = "#999999"
+
+/datum/species/skeleton/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+	C.unlock_achievement(new/datum/achievement/skeleton())
+	//RATTLE ME BONES!

@@ -79,6 +79,7 @@
 	if(give_objectives)
 		forge_traitor_objectives()
 	finalize_traitor()
+	owner.current.unlock_achievement(new/datum/achievement/traitor())
 	..()
 
 /datum/antagonist/traitor/apply_innate_effects()

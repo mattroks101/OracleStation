@@ -534,6 +534,7 @@
 					if(tplus > tloss)
 						H.adjustBrainLoss( max(0, min(99, ((tlimit - tplus) / tlimit * 100))), 150)
 					add_logs(user, H, "revived", defib)
+					H.unlock_achievement(new/datum/achievement/revive())
 				if(req_defib)
 					defib.deductcharge(revivecost)
 					cooldown = 1
