@@ -58,7 +58,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/age = 30						//age of character
 	var/underwear = "Nude"				//underwear type
 	var/undershirt = "Nude"				//undershirt type
-	var/socks = "Nude"					//socks type
 	var/backbag = DBACKPACK				//backpack type
 	var/hair_style = "Bald"				//Hair type
 	var/hair_color = "000"				//Hair color
@@ -104,6 +103,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/clientfps = 60
 
 	var/parallax
+
+	var/ambientocclusion = TRUE
 
 	var/uplink_spawn_loc = UPLINK_PDA
 
@@ -264,7 +265,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "<b>Underwear:</b><BR><a href ='?_src_=prefs;preference=underwear;task=input'>[underwear]</a><BR>"
 			dat += "<b>Undershirt:</b><BR><a href ='?_src_=prefs;preference=undershirt;task=input'>[undershirt]</a><BR>"
-			dat += "<b>Socks:</b><BR><a href ='?_src_=prefs;preference=socks;task=input'>[socks]</a><BR>"
 			dat += "<b>Backpack:</b><BR><a href ='?_src_=prefs;preference=bag;task=input'>[backbag]</a><BR>"
 			dat += "<b>Uplink Spawn Location:</b><BR><a href ='?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc]</a><BR></td>"
 
@@ -608,6 +608,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				else
 					dat += "High"
 			dat += "</a><br>"
+
+			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=ambientocclusion'>[ambientocclusion ? "Enabled" : "Disabled"]</a><br>"
 
 			dat += "</td><td width='300px' height='300px' valign='top'>"
 
@@ -979,8 +981,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					underwear = random_underwear(gender)
 				if("undershirt")
 					undershirt = random_undershirt(gender)
-				if("socks")
-					socks = random_socks()
 				if("eyes")
 					eye_color = random_eye_color()
 				if("s_tone")
@@ -1144,12 +1144,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						new_undershirt = input(user, "Choose your character's undershirt:", "Character Preference") as null|anything in GLOB.undershirt_f
 					if(new_undershirt)
 						undershirt = new_undershirt
-
-				if("socks")
-					var/new_socks
-					new_socks = input(user, "Choose your character's socks:", "Character Preference") as null|anything in GLOB.socks_list
-					if(new_socks)
-						socks = new_socks
 
 				if("eyes")
 					var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as color|null
@@ -1396,7 +1390,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						gender = MALE
 					underwear = random_underwear(gender)
 					undershirt = random_undershirt(gender)
-					socks = random_socks()
 					facial_hair_style = random_facial_hair_style(gender)
 					hair_style = random_hair_style(gender)
 
@@ -1474,6 +1467,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (parent && parent.mob && parent.mob.hud_used)
 						parent.mob.hud_used.update_parallax_pref(parent.mob)
 
+				if("ambientocclusion")
+					ambientocclusion = !ambientocclusion
+					if(parent && parent.screen && parent.screen.len)
+						var/obj/screen/plane_master/game_world/PM = locate(/obj/screen/plane_master/game_world) in parent.screen
+						PM.filters = null //byond doesn't support finding specific filters within the filters var, as the filters var is a fake list
+						if(ambientocclusion)
+							PM.filters += AMBIENT_OCCLUSION
+
 				if("save")
 					save_preferences()
 					save_character()
@@ -1530,7 +1531,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.facial_hair_style = facial_hair_style
 	character.underwear = underwear
 	character.undershirt = undershirt
-	character.socks = socks
 
 	character.backbag = backbag
 

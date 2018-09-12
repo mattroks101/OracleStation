@@ -119,6 +119,7 @@
 	desc = "An armored vest with the badge of a Blueshield Lieutenant."
 	icon_state = "blueshield"
 	item_state = "blueshield"
+	dog_fashion = /datum/dog_fashion/back/bsarmor
 
 /obj/item/clothing/suit/armor/riot
 	name = "riot suit"
@@ -382,7 +383,6 @@
 	icon_state = "heavy"
 	item_state = "swat_suit"
 	w_class = WEIGHT_CLASS_BULKY
-	gas_transfer_coefficient = 0.90
 	flags_1 = THICKMATERIAL_1
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	slowdown = 3

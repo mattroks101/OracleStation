@@ -7,6 +7,7 @@
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	layer = AREA_LAYER
+	plane = BLACKNESS_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	invisibility = INVISIBILITY_LIGHTING
 
@@ -59,6 +60,8 @@
 
 	var/list/firedoors
 	var/firedoors_last_closed_on = 0
+
+	var/disable_alerts = FALSE
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
@@ -132,6 +135,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	return ..()
 
 /area/proc/poweralert(state, obj/source)
+	if(disable_alerts)
+		return FALSE
 	if (state != poweralm)
 		poweralm = state
 		if(istype(source))	//Only report power alarms on the z-level where the source is located.
@@ -162,6 +167,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 					p.triggerAlarm("Power", src, cameras, source)
 
 /area/proc/atmosalert(danger_level, obj/source)
+	if(disable_alerts)
+		return FALSE
 	if(danger_level != atmosalm)
 		if (danger_level==2)
 			var/list/cameras = list()
@@ -211,6 +218,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 					INVOKE_ASYNC(D, (opening ? /obj/machinery/door/firedoor.proc/open : /obj/machinery/door/firedoor.proc/close))
 
 /area/proc/firealert(obj/source)
+	if(disable_alerts)
+		return FALSE
 	if(always_unpowered == 1) //no fire alarms in space/asteroid
 		return
 
@@ -269,6 +278,8 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		DOOR.lock()
 
 /area/proc/burglaralert(obj/trigger)
+	if(disable_alerts)
+		return FALSE
 	if(always_unpowered == 1) //no burglar alarms in space/asteroid
 		return
 

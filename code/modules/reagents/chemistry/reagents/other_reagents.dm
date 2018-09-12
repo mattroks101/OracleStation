@@ -1,5 +1,5 @@
 /datum/reagent/blood
-	data = list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null)
+	data = list("species"=null,"donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null)
 	name = "Blood"
 	id = "blood"
 	color = "#C80000" // rgb: 200, 0, 0
@@ -272,7 +272,7 @@
 		M.adjustBruteLoss(-2, 0)
 		M.adjustFireLoss(-2, 0)
 	else
-		M.adjustBrainLoss(3, 150)
+		M.adjustBrainLoss(3, 75)
 		M.adjustToxLoss(1, 0)
 		M.adjustFireLoss(2, 0)
 		M.adjustOxyLoss(2, 0)
@@ -292,7 +292,7 @@
 	M.IgniteMob()			//Only problem with igniting people is currently the commonly availible fire suits make you immune to being on fire
 	M.adjustToxLoss(1, 0)
 	M.adjustFireLoss(1, 0)		//Hence the other damages... ain't I a bastard?
-	M.adjustBrainLoss(5, 150)
+	M.adjustBrainLoss(5, 75)
 	holder.remove_reagent(src.id, 1)
 
 /datum/reagent/medicine/omnizine/godblood
@@ -444,7 +444,7 @@
 	else
 		to_chat(H, "<span class='danger'>The pain vanishes suddenly. You feel no different.</span>")
 
-	H.unlock_acheivement(new/datum/achievement/mutate())
+	H.unlock_achievement(new/datum/achievement/mutate())
 
 /datum/reagent/stableslimetoxin/classic //The one from plasma on green slimes
 	name = "Mutation Toxin"

@@ -157,6 +157,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["menuoptions"]		>> menuoptions
 	S["enable_tips"]		>> enable_tips
 	S["tip_delay"]			>> tip_delay
+	S["ambientocclusion"]	>> ambientocclusion
 
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
@@ -182,6 +183,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	ghost_others	= sanitize_inlist(ghost_others, GLOB.ghost_others_options, GHOST_OTHERS_DEFAULT_OPTION)
 	menuoptions		= SANITIZE_LIST(menuoptions)
 	be_special		= SANITIZE_LIST(be_special)
+	ambientocclusion	= sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
 
 
 	return 1
@@ -223,6 +225,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["menuoptions"], menuoptions)
 	WRITE_FILE(S["enable_tips"], enable_tips)
 	WRITE_FILE(S["tip_delay"], tip_delay)
+	WRITE_FILE(S["ambientocclusion"], ambientocclusion)
 
 	return 1
 
@@ -277,7 +280,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["facial_style_name"]	>> facial_hair_style
 	S["underwear"]			>> underwear
 	S["undershirt"]			>> undershirt
-	S["socks"]				>> socks
 	S["backbag"]			>> backbag
 	S["uplink_loc"]			>> uplink_spawn_loc
 	S["feature_mcolor"]					>> features["mcolor"]
@@ -348,7 +350,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		facial_hair_style			= sanitize_inlist(facial_hair_style, GLOB.facial_hair_styles_female_list)
 		underwear		= sanitize_inlist(underwear, GLOB.underwear_f)
 		undershirt		= sanitize_inlist(undershirt, GLOB.undershirt_f)
-	socks			= sanitize_inlist(socks, GLOB.socks_list)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	hair_color			= sanitize_hexcolor(hair_color, 3, 0)
 	facial_hair_color			= sanitize_hexcolor(facial_hair_color, 3, 0)
@@ -417,7 +418,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["facial_style_name"]	, facial_hair_style)
 	WRITE_FILE(S["underwear"]			, underwear)
 	WRITE_FILE(S["undershirt"]			, undershirt)
-	WRITE_FILE(S["socks"]				, socks)
+
 	WRITE_FILE(S["backbag"]			, backbag)
 	WRITE_FILE(S["uplink_loc"]			, uplink_spawn_loc)
 	WRITE_FILE(S["species"]			, pref_species.id)
